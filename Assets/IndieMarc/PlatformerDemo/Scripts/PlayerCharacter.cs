@@ -96,10 +96,10 @@ namespace IndieMarc.Platformer
             last_ground_pos = transform.position;
             hp = max_hp;
 
-            contact_filter = new ContactFilter2D();
-            contact_filter.layerMask = ground_layer;
-            contact_filter.useLayerMask = true;
-            contact_filter.useTriggers = false;
+            // contact_filter = new ContactFilter2D();
+            // contact_filter.layerMask = ground_layer;
+            // contact_filter.useLayerMask = true;
+            // contact_filter.useTriggers = false;
 
         }
 
@@ -149,16 +149,31 @@ namespace IndieMarc.Platformer
             jump_hold = !disable_controls ? controls.GetJumpHold() : false;
 
             if (jump_press || move_input.y > 0.5f)
-                Jump();
+                // Jump();
 
-            //Reset when fall
-            if (transform.position.y < fall_pos_y - GetSize().y)
-            {
-                TakeDamage(max_hp * fall_damage_percent);
-                if (reset_when_fall)
-                    Teleport(last_ground_pos);
-            }
+                //Reset when fall
+                if (transform.position.y < fall_pos_y - GetSize().y)
+                {
+                    TakeDamage(max_hp * fall_damage_percent);
+                    if (reset_when_fall)
+                        Teleport(last_ground_pos);
+                }
+
+            // RaycastHit2D hit = Physics2D.Raycast(this.transform.position, -Vector2.up, 1f);
+
+            // if (hit.collider != null)
+            // {
+            //     RotateToNormal(hit.normal);
+            // }
+
         }
+
+        private void RotateToNormal(Vector3 normal)
+        {
+            Quaternion targetRotation = Quaternion.FromToRotation(Vector3.up, normal);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, 5f * Time.deltaTime);
+        }
+
 
         private void UpdateFacing()
         {
@@ -269,6 +284,7 @@ namespace IndieMarc.Platformer
 
         private bool DetectGrounded(bool detect_ceiled)
         {
+            return true;
             bool grounded = false;
             Vector2[] raycastPositions = new Vector2[3];
 
@@ -279,11 +295,11 @@ namespace IndieMarc.Platformer
             if (capsule_coll != null)
             {
                 //Adapt raycast to collider
-                Vector2 raycast_offset = capsule_coll.offset + orientation * Mathf.Abs(capsule_coll.size.y * 0.5f - capsule_coll.size.x * 0.5f);
+                Vector2 raycast_offset = capsule_coll.offset + orientation * Mathf.Abs(capsule_coll.size.y * 0.32f - capsule_coll.size.x * 0.32f);
                 raycast_start = rigid.position + raycast_offset * transform.localScale.y;
             }
 
-            float ray_size = radius + ground_raycast_dist;
+            float ray_size = radius + ground_raycast_dist -1;
             raycastPositions[0] = raycast_start + Vector2.left * radius / 2f;
             raycastPositions[1] = raycast_start;
             raycastPositions[2] = raycast_start + Vector2.right * radius / 2f;
@@ -397,15 +413,15 @@ namespace IndieMarc.Platformer
                 return new Vector2(Mathf.Abs(transform.localScale.x) * capsule_coll.size.x, Mathf.Abs(transform.localScale.y) * capsule_coll.size.y);
             return new Vector2(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y));
         }
-        
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (is_dead)
                 return;
-            
+
         }
 
-        public static PlayerCharacter GetNearest(Vector3 pos, float range = 99999f, bool alive_only=false)
+        public static PlayerCharacter GetNearest(Vector3 pos, float range = 99999f, bool alive_only = false)
         {
             PlayerCharacter nearest = null;
             float min_dist = range;

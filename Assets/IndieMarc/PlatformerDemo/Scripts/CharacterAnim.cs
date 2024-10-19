@@ -26,12 +26,12 @@ namespace IndieMarc.Platformer
         {
 
             //Anims
-            animator.SetBool("Jumping", character.IsJumping());
-            animator.SetBool("InAir", !character.IsGrounded());
-            animator.SetBool("Crouching", character.IsCrouching());
+            // animator.SetBool("Jumping", character.IsJumping());
+            // animator.SetBool("InAir", !character.IsGrounded());
+            // animator.SetBool("Crouching", character.IsCrouching());
             animator.SetFloat("Speed", character.GetMove().magnitude);
-            if (character_item != null)
-                animator.SetBool("Hold", character_item.GetHeldItem() != null);
+            // if (character_item != null)
+            //     animator.SetBool("Hold", character_item.GetHeldItem() != null);
 
         }
 
