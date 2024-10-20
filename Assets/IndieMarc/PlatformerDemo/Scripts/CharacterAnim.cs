@@ -17,9 +17,6 @@ namespace IndieMarc.Platformer
             character = GetComponent<PlayerCharacter>();
             character_item = GetComponent<CharacterHoldItem>();
             animator = GetComponent<Animator>();
-
-            character.onJump += OnJump;
-            character.onCrouch += OnCrouch;
         }
 
         void Update()

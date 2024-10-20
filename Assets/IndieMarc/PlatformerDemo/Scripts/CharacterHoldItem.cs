@@ -21,12 +21,12 @@ namespace IndieMarc.Platformer
 
         private void Start()
         {
-            character.onDeath += DropItem;
+            // character.onDeath += DropItem;
         }
 
         void Update()
         {
-            PlayerControls controls = PlayerControls.Get(character.player_id);
+            PlayerControls controls = PlayerControls.Get(character.playerId);
             
             take_item_timer += Time.deltaTime;
             if (held_item && controls.GetActionDown())

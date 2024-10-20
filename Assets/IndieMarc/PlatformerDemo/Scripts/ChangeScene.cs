@@ -17,18 +17,17 @@ namespace IndieMarc.Platformer {
             float endAlpha = isOut ? 0 : 1;
             float time = 0;
 
-            while (time < duration)
-            {
-            float alpha = Mathf.Lerp(startAlpha, endAlpha, time / duration);
-            fadeImage.color = new Color(color.r, color.g, color.b, alpha);
-            time += Time.deltaTime;
-            yield return null;
+            while (time < duration) {
+                float alpha = Mathf.Lerp(startAlpha, endAlpha, time / duration);
+                fadeImage.color = new Color(color.r, color.g, color.b, alpha);
+                time += Time.deltaTime;
+                yield return null;
             }
 
             fadeImage.color = new Color(color.r, color.g, color.b, endAlpha);
         }
 
-        IEnumerator SwitchScene(string sceneName, float duration) {
+        public IEnumerator SwitchScene(string sceneName, float duration) {
             yield return StartCoroutine(Fade(false, duration));
             SceneManager.LoadScene(sceneName);
         }

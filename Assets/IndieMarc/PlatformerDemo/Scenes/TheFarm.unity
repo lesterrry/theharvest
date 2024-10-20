@@ -1115,31 +1115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792237b3c87ee6b4c90a74cd87026a89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_id: 0
-  max_hp: 100
-  invulnerable: 0
-  move_accel: 15
-  move_deccel: 20
-  move_max: 10000
-  forceMovement: 1
+  playerId: 0
+  isScarecrow: 1
+  movementSpeed: 10000
+  jumpStrength: 10000
+  moveByTorque: 1
   centerOfMass: {x: 0, y: -0.5}
-  can_jump: 1
-  double_jump: 0
-  jump_strength: 10000
-  jump_time_min: 0.25
-  jump_time_max: 0.5
-  jump_gravity: 5
-  jump_fall_gravity: 20
-  jump_move_percent: 0.75
-  ground_layer:
-    serializedVersion: 2
-    m_Bits: 256
-  ground_raycast_dist: 0.01
-  can_crouch: 0
-  crouch_coll_percent: 0.65
-  reset_when_fall: 1
-  fall_pos_y: -5
-  fall_damage_percent: 0.25
 --- !u!114 &114742280707770649
 MonoBehaviour:
   m_ObjectHideFlags: 0
