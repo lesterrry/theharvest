@@ -4,12 +4,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace IndieMarc.Platformer {
-    public class ChangeScene : MonoBehaviour {
-        public string targetScene;
-
+    public class SceneSwitcher : MonoBehaviour {
         public Image fadeImage;
 
-        private float defaultSpeed = 1f;
+        public float fadeSpeed = 1f;
 
         IEnumerator Fade(bool isOut, float duration) {
             Color color = fadeImage.color;
@@ -27,17 +25,17 @@ namespace IndieMarc.Platformer {
             fadeImage.color = new Color(color.r, color.g, color.b, endAlpha);
         }
 
-        public IEnumerator SwitchScene(string sceneName, float duration) {
-            yield return StartCoroutine(Fade(false, duration));
+        IEnumerator SwitchScene(string sceneName) {
+            yield return StartCoroutine(Fade(false, fadeSpeed));
             SceneManager.LoadScene(sceneName);
         }
 
-        void Awake() {
-            StartCoroutine(Fade(true, defaultSpeed));
+        public IEnumerator FadeIn() {
+            yield return StartCoroutine(Fade(true, fadeSpeed));
         }
 
-        void OnTriggerEnter2D(Collider2D other) {
-            if (other.gameObject.tag == "Player") StartCoroutine(SwitchScene(targetScene, defaultSpeed));
+        public void StartSwitchScene(string targetScene) {
+            StartCoroutine(SwitchScene(targetScene));
         }
     }
 }

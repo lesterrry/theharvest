@@ -547,6 +547,57 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!1 &985602783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 985602784}
+  - component: {fileID: 985602785}
+  m_Layer: 0
+  m_Name: PlayerControls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &985602784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985602783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2001445338}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &985602785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985602783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec80819f2b286fd4a94401058273799d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_id: 0
+  left_key: 97
+  right_key: 100
+  up_key: 119
+  down_key: 115
+  jump_key: 32
+  action_key: 304
 --- !u!1001 &1063250456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1011,7 +1062,7 @@ GameObject:
   - component: {fileID: 1497657346}
   - component: {fileID: 1497657347}
   m_Layer: 0
-  m_Name: SceneSwitcher
+  m_Name: SceneChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1090,7 +1141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScene: TheFarm
-  fadeImage: {fileID: 1677953650}
+  sceneSwitcher: {fileID: 1604467554}
 --- !u!1001 &1508162508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1146,6 +1197,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1508162508}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1604467552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1604467553}
+  - component: {fileID: 1604467554}
+  m_Layer: 0
+  m_Name: SceneSwitcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1604467553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604467552}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2001445338}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1604467554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604467552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d8c9c85d62d4f5f910f1fb2fca2f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeImage: {fileID: 1677953650}
+  fadeSpeed: 2
 --- !u!1 &1653916967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,6 +1789,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
+      propertyPath: isScarecrow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: moveByTorque
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
       propertyPath: ground_raycast_dist
       value: 0.01
       objectReference: {fileID: 0}
@@ -1911,7 +2023,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2001445338}
-  - component: {fileID: 2001445337}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1919,25 +2030,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!114 &2001445337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001445336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec80819f2b286fd4a94401058273799d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player_id: 0
-  left_key: 97
-  right_key: 100
-  up_key: 119
-  down_key: 115
-  jump_key: 32
-  action_key: 304
 --- !u!4 &2001445338
 Transform:
   m_ObjectHideFlags: 0
@@ -1950,7 +2042,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 985602784}
+  - {fileID: 1604467553}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004517539

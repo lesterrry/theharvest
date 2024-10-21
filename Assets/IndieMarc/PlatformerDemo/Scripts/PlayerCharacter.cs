@@ -24,6 +24,9 @@ namespace IndieMarc.Platformer
         public bool moveByTorque;
         public Vector2 centerOfMass = new Vector2(0, 0);
 
+        [Header("Connections")]
+        public SceneSwitcher sceneSwitcher;
+
         private Rigidbody2D rigidBody;
         private Collider2D physicsCollider;
         private Collider2D collisionCollider;
@@ -68,7 +71,11 @@ namespace IndieMarc.Platformer
 
         void FixedUpdate()
         {
-            if (isScarecrow) move.x = -moveInput.x;
+            if (isScarecrow) {
+                move.x = -moveInput.x;
+            } else {
+                move.x = moveInput.x;
+            }
 
             UpdateFacing();
 
@@ -80,9 +87,7 @@ namespace IndieMarc.Platformer
             }
         }
 
-        void Update()
-        {
-            //Controls
+        void Update() {
             PlayerControls controls = PlayerControls.Get(playerId);
             moveInput = controls.GetMove();
             jumpPress = controls.GetJumpDown();
@@ -114,11 +119,13 @@ namespace IndieMarc.Platformer
 
         public void Teleport(Vector3 pos)
         {
-            rigidBody.angularVelocity = 0f;
-            rigidBody.velocity = Vector2.zero;
-            transform.position = pos;
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-            move = Vector2.zero;
+            // rigidBody.angularVelocity = 0f;
+            // rigidBody.velocity = Vector2.zero;
+            // transform.position = pos;
+            // transform.rotation = new Quaternion(0, 0, 0, 0);
+            // move = Vector2.zero;
+
+            sceneSwitcher.StartSwitchScene("TheFarm");
         }
 
         public Vector2 GetMove()
