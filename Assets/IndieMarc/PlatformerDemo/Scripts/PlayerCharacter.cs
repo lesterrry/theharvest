@@ -31,14 +31,18 @@ namespace IndieMarc.Platformer
         private Collider2D physicsCollider;
         private Collider2D collisionCollider;
 
+        private Collider2D activeCollision;
+
         private Vector3 returnPosition;
         private Vector3 start_scale;
 
         private Vector2 move;
         private Vector2 moveInput;
         private bool jumpPress;
+        private bool actionPress;
+        private bool isGrounded = true;
 
-        private static Dictionary<int, PlayerCharacter> characterList = new Dictionary<int, PlayerCharacter>();
+        private static readonly Dictionary<int, PlayerCharacter> characterList = new();
 
         void Awake() {
             characterList[playerId] = this;
@@ -91,8 +95,14 @@ namespace IndieMarc.Platformer
             PlayerControls controls = PlayerControls.Get(playerId);
             moveInput = controls.GetMove();
             jumpPress = controls.GetJumpDown();
+            actionPress = controls.GetActionDown();
 
             if (jumpPress || moveInput.y > 0.5f) Jump();
+
+            if (actionPress && activeCollision) {
+                VeggieCharacter veggie = activeCollision.gameObject.GetComponent<VeggieCharacter>();
+                veggie?.Take();
+            }
         }
 
         private void UpdateFacing()
@@ -104,17 +114,12 @@ namespace IndieMarc.Platformer
             }
         }
 
-        public void Jump(bool force_jump = false)
+        public void Jump()
         {
-            Debug.Log("bebra");
+            if (!isGrounded) return;
 
             Vector2 direction = transform.TransformDirection(Vector2.up);
             rigidBody.AddForce(direction * jumpStrength, ForceMode2D.Force);
-        }
-
-        private bool DetectGrounded(bool detect_ceiled)
-        {
-            return true;
         }
 
         public void Teleport(Vector3 pos)
@@ -139,10 +144,34 @@ namespace IndieMarc.Platformer
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if (collision.gameObject.tag == "Ground" && collisionCollider.IsTouching(collision.collider)) {
-                Debug.Log("Fell");
-                Teleport(returnPosition);
+            if (collision.gameObject.tag == "Ground") {
+                if (collisionCollider.IsTouching(collision.collider)) {
+                    Debug.Log("Fell");
+                    Teleport(returnPosition);
+                } else if (physicsCollider.IsTouching(collision.collider)) {
+                    isGrounded = true;
+                }
             }
+        }
+
+        private void OnCollisionExit2D(Collision2D collision) {
+            if (collision.gameObject.tag == "Ground") {
+                if (!physicsCollider.IsTouching(collision.collider)) {
+                    isGrounded = false;
+                }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision) {
+            if (collision.gameObject.tag == "Veggie") {
+                Debug.Log("Veg");
+
+                activeCollision = collision;
+            }
+        }
+
+        private void OnTriggerExit2D() {
+            activeCollision = null;
         }
 
         public static PlayerCharacter Get(int playerId)
