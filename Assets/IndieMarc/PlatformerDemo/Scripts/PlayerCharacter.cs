@@ -26,6 +26,9 @@ namespace IndieMarc.Platformer
 
         [Header("Connections")]
         public SceneSwitcher sceneSwitcher;
+        public Bubble speechBubble;
+
+        private GameObject anchor;
 
         private Rigidbody2D rigidBody;
         private Collider2D physicsCollider;
@@ -41,6 +44,8 @@ namespace IndieMarc.Platformer
         private bool jumpPress;
         private bool actionPress;
         private bool isGrounded = true;
+        // private bool isFrozen = true;
+        private bool isSpeaking = false;
 
         private static readonly Dictionary<int, PlayerCharacter> characterList = new();
 
@@ -48,6 +53,7 @@ namespace IndieMarc.Platformer
             characterList[playerId] = this;
             
             rigidBody = GetComponent<Rigidbody2D>();
+            anchor = gameObject.transform.Find("Anchor").gameObject;
 
             if (isScarecrow) {
                 physicsCollider = GetComponent<BoxCollider2D>();
@@ -75,6 +81,8 @@ namespace IndieMarc.Platformer
 
         void FixedUpdate()
         {
+            if (isSpeaking) return;
+
             if (isScarecrow) {
                 move.x = -moveInput.x;
             } else {
@@ -100,9 +108,18 @@ namespace IndieMarc.Platformer
             if (jumpPress || moveInput.y > 0.5f) Jump();
 
             if (actionPress && activeCollision) {
-                VeggieCharacter veggie = activeCollision.gameObject.GetComponent<VeggieCharacter>();
-                veggie?.Take();
+                Bubble veggie = activeCollision.gameObject.GetComponent<Bubble>();
+                callBubble("Вкусное");
+                veggie?.Hide();
+            } else if (actionPress && isSpeaking) {
+                speechBubble.Hide();
+                isSpeaking = false;
             }
+        }
+
+        private void callBubble(string text) {
+            speechBubble.Call(text, anchor);
+            isSpeaking = true;
         }
 
         private void UpdateFacing()
@@ -116,7 +133,7 @@ namespace IndieMarc.Platformer
 
         public void Jump()
         {
-            if (!isGrounded) return;
+            if (!isGrounded || isSpeaking) return;
 
             Vector2 direction = transform.TransformDirection(Vector2.up);
             rigidBody.AddForce(direction * jumpStrength, ForceMode2D.Force);
@@ -124,12 +141,6 @@ namespace IndieMarc.Platformer
 
         public void Teleport(Vector3 pos)
         {
-            // rigidBody.angularVelocity = 0f;
-            // rigidBody.velocity = Vector2.zero;
-            // transform.position = pos;
-            // transform.rotation = new Quaternion(0, 0, 0, 0);
-            // move = Vector2.zero;
-
             sceneSwitcher.StartSwitchScene("TheFarm");
         }
 
@@ -146,7 +157,7 @@ namespace IndieMarc.Platformer
         private void OnCollisionEnter2D(Collision2D collision) {
             if (collision.gameObject.tag == "Ground") {
                 if (collisionCollider.IsTouching(collision.collider)) {
-                    Debug.Log("Fell");
+                    callBubble("ау(");
                     Teleport(returnPosition);
                 } else if (physicsCollider.IsTouching(collision.collider)) {
                     isGrounded = true;
@@ -164,8 +175,6 @@ namespace IndieMarc.Platformer
 
         private void OnTriggerEnter2D(Collider2D collision) {
             if (collision.gameObject.tag == "Veggie") {
-                Debug.Log("Veg");
-
                 activeCollision = collision;
             }
         }
