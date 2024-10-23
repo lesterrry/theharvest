@@ -4,19 +4,19 @@ using UnityEngine;
 
 namespace IndieMarc.Platformer
 {
-    [RequireComponent(typeof(PlayerCharacter))]
+    [RequireComponent(typeof(CharacterLogic))]
     public class CharacterHoldItem : MonoBehaviour
     {
         public Transform hand;
 
-        private PlayerCharacter character;
+        private CharacterLogic character;
 
         private CarryItem held_item = null;
         private float take_item_timer = 0f;
 
         void Awake()
         {
-            character = GetComponent<PlayerCharacter>();
+            character = GetComponent<CharacterLogic>();
         }
 
         private void Start()
@@ -26,7 +26,7 @@ namespace IndieMarc.Platformer
 
         void Update()
         {
-            PlayerControls controls = PlayerControls.Get(character.playerId);
+            CharacterControl controls = CharacterControl.Get(character.playerId);
             
             take_item_timer += Time.deltaTime;
             if (held_item && controls.GetActionDown())
@@ -61,7 +61,7 @@ namespace IndieMarc.Platformer
             }
         }
 
-        public PlayerCharacter GetCharacter()
+        public CharacterLogic GetCharacter()
         {
             return character;
         }

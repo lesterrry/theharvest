@@ -311,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 50271368488489786, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
       propertyPath: m_BodyType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50271368488489786, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
@@ -385,8 +385,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
-      propertyPath: m_Enabled
+      propertyPath: playerId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: isEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
@@ -405,13 +415,23 @@ PrefabInstance:
       objectReference: {fileID: 1689860962}
     - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
+      propertyPath: movementSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: sceneSwitcher
+      value: 
+      objectReference: {fileID: 1815521954}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
       propertyPath: ground_raycast_dist
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 114541676939290310, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114742282308265290, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
@@ -436,8 +456,68 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 212331576666244696, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212331576666244696, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: storyId
+      value: fox
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[4].id
+      value: awaiting_scarecrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[0].type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[4].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[0].speech
+      value: i can't move past the farmer unnoticed
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[1].speech
+      value: i guess if i could just..
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[2].speech
+      value: use this thing...
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[3].speech
+      value: ...whatever that means
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: events.Array.data[4].speech
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 592880768500325518, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
@@ -572,8 +652,8 @@ GameObject:
   - component: {fileID: 651700191}
   - component: {fileID: 651700190}
   m_Layer: 0
-  m_Name: SceneChanger
-  m_TagString: Untagged
+  m_Name: SceneSwitchTrigger
+  m_TagString: SceneSwitcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,7 +667,7 @@ Transform:
   m_GameObject: {fileID: 651700188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.8, y: -5.83, z: -0.38612002}
+  m_LocalPosition: {x: -11.8, y: -5.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -606,7 +686,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScene: PlatformerDemo
-  sceneSwitcher: {fileID: 1815521954}
 --- !u!61 &651700191
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1601,10 +1680,10 @@ GameObject:
   - component: {fileID: 4024761615214581}
   - component: {fileID: 212331577210300939}
   - component: {fileID: 50271370128179049}
-  - component: {fileID: 114086078012238463}
-  - component: {fileID: 114742280707770649}
   - component: {fileID: 212331577210300940}
   - component: {fileID: 212331577210300941}
+  - component: {fileID: 114086078012238463}
+  - component: {fileID: 212331577210300942}
   m_Layer: 0
   m_Name: TheScarecrow
   m_TagString: Player
@@ -1620,14 +1699,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262359461378041}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.05408127, w: 0.9985365}
   m_LocalPosition: {x: -3.5921519, y: -4.40757, z: -0.3371432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1661282387}
   m_Father: {fileID: 1614131794}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -6.2}
 --- !u!50 &50271370128179049
 Rigidbody2D:
   serializedVersion: 4
@@ -1636,7 +1715,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262359461378041}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1669,25 +1748,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerId: 0
   isScarecrow: 1
+  isEnabled: 0
   movementSpeed: 10000
   jumpStrength: 10000
   moveByTorque: 1
   centerOfMass: {x: 0, y: -0.5}
   sceneSwitcher: {fileID: 1815521954}
   speechBubble: {fileID: 1689860962}
---- !u!114 &114742280707770649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262359461378041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854ab241cb96bcc44b8e766dd629ebf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hand: {fileID: 0}
+  isSpeaking: 0
 --- !u!212 &212331577210300939
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1820,6 +1888,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01297605, y: 0.26601064}
   m_Size: {x: 0.9826324, y: 2.5267909}
   m_Direction: 0
+--- !u!114 &212331577210300942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262359461378041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd5bcc2a04774de3aec1d598ca215fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storyId: 
+  currentEventId: 
+  events: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

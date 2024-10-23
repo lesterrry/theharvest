@@ -11,12 +11,14 @@ using UnityEngine.Events;
 namespace IndieMarc.Platformer
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerCharacter : MonoBehaviour
+    [RequireComponent(typeof(CharacterStory))]
+    public class CharacterLogic : MonoBehaviour
     {
         public int playerId;
 
         [Header("Main")]
         public bool isScarecrow;
+        public bool isEnabled;
 
         [Header("Physics")]
         public float movementSpeed = 1f;
@@ -28,15 +30,18 @@ namespace IndieMarc.Platformer
         public SceneSwitcher sceneSwitcher;
         public Bubble speechBubble;
 
+        [HideInInspector]
+        public bool isSpeaking = false;
+
         private GameObject anchor;
 
+        private CharacterStory story;
         private Rigidbody2D rigidBody;
         private Collider2D physicsCollider;
         private Collider2D collisionCollider;
 
         private Collider2D activeCollision;
 
-        private Vector3 returnPosition;
         private Vector3 start_scale;
 
         private Vector2 move;
@@ -44,26 +49,31 @@ namespace IndieMarc.Platformer
         private bool jumpPress;
         private bool actionPress;
         private bool isGrounded = true;
-        // private bool isFrozen = true;
-        private bool isSpeaking = false;
 
-        private static readonly Dictionary<int, PlayerCharacter> characterList = new();
+        private static readonly Dictionary<int, CharacterLogic> characterList = new();
 
         void Awake() {
             characterList[playerId] = this;
             
             rigidBody = GetComponent<Rigidbody2D>();
+            story = GetComponent<CharacterStory>();
             anchor = gameObject.transform.Find("Anchor").gameObject;
 
             if (isScarecrow) {
                 physicsCollider = GetComponent<BoxCollider2D>();
                 collisionCollider = GetComponent<CapsuleCollider2D>();
+                
+                if (GameProgress.enteredScarecrow) {
+                    isEnabled = true;
+                    rigidBody.bodyType = RigidbodyType2D.Dynamic;
+                }
             } else {
                 physicsCollider = GetComponent<CapsuleCollider2D>();
+
+                if (GameProgress.enteredScarecrow) isEnabled = false;
             }
 
             start_scale = transform.localScale;
-            returnPosition = transform.position;
         }
 
         void Start() {
@@ -79,9 +89,8 @@ namespace IndieMarc.Platformer
             }
         }
 
-        void FixedUpdate()
-        {
-            if (isSpeaking) return;
+        void FixedUpdate() {
+            if (isSpeaking || !isEnabled) return;
 
             if (isScarecrow) {
                 move.x = -moveInput.x;
@@ -100,24 +109,32 @@ namespace IndieMarc.Platformer
         }
 
         void Update() {
-            PlayerControls controls = PlayerControls.Get(playerId);
+            if (!isEnabled) return;
+
+            CharacterControl controls = CharacterControl.Get(playerId);
             moveInput = controls.GetMove();
             jumpPress = controls.GetJumpDown();
             actionPress = controls.GetActionDown();
 
             if (jumpPress || moveInput.y > 0.5f) Jump();
 
-            if (actionPress && activeCollision) {
-                Bubble veggie = activeCollision.gameObject.GetComponent<Bubble>();
-                callBubble("Вкусное");
-                veggie?.Hide();
-            } else if (actionPress && isSpeaking) {
-                speechBubble.Hide();
-                isSpeaking = false;
+            if (actionPress) {
+                if (activeCollision) {
+                    Bubble veggie = activeCollision.gameObject.GetComponent<Bubble>();
+                    CallBubble("Вкусное");
+                    veggie?.Hide();
+                } else if (isSpeaking) {
+                    speechBubble.Hide();
+                    isSpeaking = false;
+                } else if (story.currentEventId == "awaiting_scarecrow") {
+                    GameProgress.enteredScarecrow = true;
+                    GameProgress.stories["fox"] = "awaiting_scarecrow";
+                    Reload();
+                }
             }
         }
 
-        private void callBubble(string text) {
+        public void CallBubble(string text) {
             speechBubble.Call(text, anchor);
             isSpeaking = true;
         }
@@ -139,26 +156,23 @@ namespace IndieMarc.Platformer
             rigidBody.AddForce(direction * jumpStrength, ForceMode2D.Force);
         }
 
-        public void Teleport(Vector3 pos)
-        {
+        public void Reload() {
             sceneSwitcher.StartSwitchScene("TheFarm");
         }
 
-        public Vector2 GetMove()
-        {
+        public Vector2 GetMove() {
             return move;
         }
 
-        public Vector2 GetFacing()
-        {
+        public Vector2 GetFacing() {
             return Vector2.right * Mathf.Sign(transform.localScale.x);
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if (collision.gameObject.tag == "Ground") {
+            if (isScarecrow && collision.gameObject.tag == "Ground") {
                 if (collisionCollider.IsTouching(collision.collider)) {
-                    callBubble("ау(");
-                    Teleport(returnPosition);
+                    CallBubble("ау(");
+                    Reload();
                 } else if (physicsCollider.IsTouching(collision.collider)) {
                     isGrounded = true;
                 }
@@ -174,8 +188,11 @@ namespace IndieMarc.Platformer
         }
 
         private void OnTriggerEnter2D(Collider2D collision) {
-            if (collision.gameObject.tag == "Veggie") {
+            if (isScarecrow && collision.gameObject.tag == "Veggie") {
                 activeCollision = collision;
+            } else if (collision.gameObject.tag == "SceneSwitcher") {
+                SceneSwitchTrigger trigger = collision.gameObject.GetComponent<SceneSwitchTrigger>();
+                sceneSwitcher.StartSwitchScene(trigger.targetScene);
             }
         }
 
@@ -183,9 +200,9 @@ namespace IndieMarc.Platformer
             activeCollision = null;
         }
 
-        public static PlayerCharacter Get(int playerId)
+        public static CharacterLogic Get(int playerId)
         {
-            foreach (PlayerCharacter character in GetAll())
+            foreach (CharacterLogic character in GetAll())
             {
                 if (character.playerId == playerId)
                 {
@@ -195,9 +212,9 @@ namespace IndieMarc.Platformer
             return null;
         }
 
-        public static PlayerCharacter[] GetAll()
+        public static CharacterLogic[] GetAll()
         {
-            PlayerCharacter[] list = new PlayerCharacter[characterList.Count];
+            CharacterLogic[] list = new CharacterLogic[characterList.Count];
             characterList.Values.CopyTo(list, 0);
             return list;
         }

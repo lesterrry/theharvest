@@ -10,7 +10,7 @@ using UnityEngine;
 namespace IndieMarc.Platformer
 {
 
-    public class PlayerControls : MonoBehaviour
+    public class CharacterControl : MonoBehaviour
     {
         public int player_id;
         public KeyCode left_key;
@@ -26,7 +26,7 @@ namespace IndieMarc.Platformer
         private bool action_press = false;
         private bool action_hold = false;
 
-        private static Dictionary<int, PlayerControls> controls = new Dictionary<int, PlayerControls>();
+        private static Dictionary<int, CharacterControl> controls = new Dictionary<int, CharacterControl>();
 
         void Awake()
         {
@@ -40,7 +40,6 @@ namespace IndieMarc.Platformer
 
         void Update()
         {
-
             move = Vector2.zero;
             jump_hold = false;
             jump_press = false;
@@ -61,8 +60,6 @@ namespace IndieMarc.Platformer
                 action_press = true;
         }
 
-
-        //------ These functions should be called from the Update function, not FixedUpdate
         public Vector2 GetMove()
         {
             return move;
@@ -90,9 +87,9 @@ namespace IndieMarc.Platformer
 
         //-----------
 
-        public static PlayerControls Get(int player_id)
+        public static CharacterControl Get(int player_id)
         {
-            foreach (PlayerControls control in GetAll())
+            foreach (CharacterControl control in GetAll())
             {
                 if (control.player_id == player_id)
                 {
@@ -102,9 +99,9 @@ namespace IndieMarc.Platformer
             return null;
         }
 
-        public static PlayerControls[] GetAll()
+        public static CharacterControl[] GetAll()
         {
-            PlayerControls[] list = new PlayerControls[controls.Count];
+            CharacterControl[] list = new CharacterControl[controls.Count];
             controls.Values.CopyTo(list, 0);
             return list;
         }

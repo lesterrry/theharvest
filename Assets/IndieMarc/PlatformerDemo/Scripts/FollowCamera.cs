@@ -22,7 +22,7 @@ namespace IndieMarc.Platformer
         public float level_left;
         public float level_right;
 
-        private PlayerCharacter target_character;
+        private CharacterLogic target_character;
         private Camera cam;
         private Vector3 cur_pos;
         private GameObject lock_target = null;

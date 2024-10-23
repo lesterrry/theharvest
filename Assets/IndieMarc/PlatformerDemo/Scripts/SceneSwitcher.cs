@@ -9,6 +9,10 @@ namespace IndieMarc.Platformer {
 
         public float fadeSpeed = 1f;
 
+        void Awake() {
+            StartCoroutine(FadeIn());
+        }
+
         IEnumerator Fade(bool isOut, float duration) {
             Color color = fadeImage.color;
             float startAlpha = isOut ? 1 : 0;

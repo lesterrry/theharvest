@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace IndieMarc.Platformer
 {
-    [RequireComponent(typeof(PlayerCharacter))]
+    [RequireComponent(typeof(CharacterLogic))]
     [RequireComponent(typeof(Animator))]
     public class CharacterAnim : MonoBehaviour
     {
-        private PlayerCharacter character;
+        private CharacterLogic character;
         private CharacterHoldItem character_item;
         private Animator animator;
 
         void Awake()
         {
-            character = GetComponent<PlayerCharacter>();
+            character = GetComponent<CharacterLogic>();
             character_item = GetComponent<CharacterHoldItem>();
             animator = GetComponent<Animator>();
         }
