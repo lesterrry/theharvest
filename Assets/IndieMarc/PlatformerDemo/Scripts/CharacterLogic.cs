@@ -35,6 +35,7 @@ namespace IndieMarc.Platformer
 
         private GameObject anchor;
 
+        private SpriteSwitcher spriteSwitcher;
         private CharacterStory story;
         private Rigidbody2D rigidBody;
         private Collider2D physicsCollider;
@@ -62,15 +63,20 @@ namespace IndieMarc.Platformer
             if (isScarecrow) {
                 physicsCollider = GetComponent<BoxCollider2D>();
                 collisionCollider = GetComponent<CapsuleCollider2D>();
+                spriteSwitcher = GetComponent<SpriteSwitcher>();
                 
                 if (GameProgress.enteredScarecrow) {
                     isEnabled = true;
                     rigidBody.bodyType = RigidbodyType2D.Dynamic;
+                    spriteSwitcher.Switch(1);
                 }
             } else {
                 physicsCollider = GetComponent<CapsuleCollider2D>();
 
-                if (GameProgress.enteredScarecrow) isEnabled = false;
+                if (GameProgress.enteredScarecrow) {
+                    gameObject.SetActive(false);
+                    isEnabled = false;
+                }
             }
 
             start_scale = transform.localScale;
@@ -171,7 +177,7 @@ namespace IndieMarc.Platformer
         private void OnCollisionEnter2D(Collision2D collision) {
             if (isScarecrow && collision.gameObject.tag == "Ground") {
                 if (collisionCollider.IsTouching(collision.collider)) {
-                    CallBubble("ау(");
+                    CallBubble("Ouch :(");
                     Reload();
                 } else if (physicsCollider.IsTouching(collision.collider)) {
                     isGrounded = true;
