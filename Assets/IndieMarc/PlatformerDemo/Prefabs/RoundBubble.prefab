@@ -294,7 +294,7 @@ RectTransform:
   m_GameObject: {fileID: 7475100456496692711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.82, y: 0.82, z: 0.82}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7715637898604085564}
@@ -405,7 +405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38029e6d1a8ac4b2c94ecfde5fd04d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 8630332977774065867}
+  isEnabled: 0
+  textElement: {fileID: 0}
+  anchor: {fileID: 0}
 --- !u!95 &3482347701978972604
 Animator:
   serializedVersion: 5

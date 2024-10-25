@@ -22,8 +22,7 @@ namespace IndieMarc.Platformer {
 
 
         private static void OnPlayModeState(PlayModeStateChange obj) {
-            if (obj == PlayModeStateChange.ExitingPlayMode)
-            {
+            if (obj == PlayModeStateChange.ExitingPlayMode) {
                 Reset();
                 Debug.Log("Progress reset");
             }

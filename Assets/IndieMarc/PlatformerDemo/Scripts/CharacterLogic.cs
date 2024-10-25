@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,6 +30,7 @@ namespace IndieMarc.Platformer
         [Header("Connections")]
         public SceneSwitcher sceneSwitcher;
         public Bubble speechBubble;
+        public FarmerLogic farmer;
 
         [HideInInspector]
         public bool isSpeaking = false;
@@ -50,6 +52,8 @@ namespace IndieMarc.Platformer
         private bool jumpPress;
         private bool actionPress;
         private bool isGrounded = true;
+        private bool isBusted = false;
+        private int veggiesTaken = 0;
 
         private static readonly Dictionary<int, CharacterLogic> characterList = new();
 
@@ -69,6 +73,12 @@ namespace IndieMarc.Platformer
                     isEnabled = true;
                     rigidBody.bodyType = RigidbodyType2D.Dynamic;
                     spriteSwitcher.Switch(1);
+
+                    GameObject[] veggies = GameObject.FindGameObjectsWithTag("Veggie");
+                    foreach (GameObject veggie in veggies) {
+                        veggie.GetComponent<Bubble>().Show();
+                        Debug.Log("!!!");
+                    }
                 }
             } else {
                 physicsCollider = GetComponent<CapsuleCollider2D>();
@@ -115,20 +125,41 @@ namespace IndieMarc.Platformer
         }
 
         void Update() {
-            if (!isEnabled) return;
-
             CharacterControl controls = CharacterControl.Get(playerId);
             moveInput = controls.GetMove();
             jumpPress = controls.GetJumpDown();
             actionPress = controls.GetActionDown();
 
-            if (jumpPress || moveInput.y > 0.5f) Jump();
+            if (isScarecrow && isBusted && actionPress) {
+                CallBubble("АААААА!!!!");
+                Reload();
+            }
+
+            if (isScarecrow && veggiesTaken >= 3 && actionPress) {
+                GameProgress.Reset();
+                sceneSwitcher.StartSwitchScene("PlatformerDemo");
+            }
+
+            if (!isEnabled) return;
+
+            if (isScarecrow && !farmer.isSleeping && (moveInput.x != 0 || jumpPress || actionPress)) {
+                farmer.HeartAttack();
+                isEnabled = false;
+                isBusted = true;
+            }
+
+            if (jumpPress) Jump();
 
             if (actionPress) {
                 if (activeCollision) {
                     Bubble veggie = activeCollision.gameObject.GetComponent<Bubble>();
-                    CallBubble("Вкусное");
                     veggie?.Hide();
+                    veggiesTaken++;
+                    if (veggiesTaken >= 3) {
+                        CallBubble("Yums!!! Time to leave for today");
+                    } else {
+                        CallBubble("Yums!");
+                    }
                 } else if (isSpeaking) {
                     speechBubble.Hide();
                     isSpeaking = false;
@@ -175,7 +206,7 @@ namespace IndieMarc.Platformer
         }
 
         private void OnCollisionEnter2D(Collision2D collision) {
-            if (isScarecrow && collision.gameObject.tag == "Ground") {
+            if (isScarecrow && isEnabled && collision.gameObject.tag == "Ground") {
                 if (collisionCollider.IsTouching(collision.collider)) {
                     CallBubble("Ouch :(");
                     Reload();

@@ -29,6 +29,11 @@ public class Bubble : MonoBehaviour {
         UpdateAppearance();
     }
 
+    public void Show() {
+        isEnabled = true;
+        UpdateAppearance();
+    }
+
     public void SetText(string textString) {
         if (!textElement) return;
 
