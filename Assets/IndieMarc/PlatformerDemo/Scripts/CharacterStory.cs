@@ -6,20 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 namespace IndieMarc.Platformer {
-    [System.Serializable]
-    public class StoryEvent {
-        public enum Type {
-            Say,
-            Delay,
-            Await
-        };
-
-        public string id = string.Empty;
-        public Type type;
-        public float delayTime = 0;
-        public string? speech;
-    }
-
     [RequireComponent(typeof(CharacterLogic))]
     public class CharacterStory : MonoBehaviour
     {
@@ -39,7 +25,7 @@ namespace IndieMarc.Platformer {
                         break;
                     }
                     case StoryEvent.Type.Say: {
-                        while (logic.isSpeaking) yield return null;
+                        // while (logic.isSpeaking) yield return null;
 
                         logic.CallBubble(e.speech);
                         break;

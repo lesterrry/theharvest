@@ -13,6 +13,7 @@ namespace IndieMarc.Platformer
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CharacterStory))]
+    [RequireComponent(typeof(Speaker))]
     public class CharacterLogic : MonoBehaviour
     {
         public int playerId;
@@ -29,15 +30,14 @@ namespace IndieMarc.Platformer
 
         [Header("Connections")]
         public SceneSwitcher sceneSwitcher;
+        public StoryManager storyManager;
         public Bubble speechBubble;
         public FarmerLogic farmer;
-
-        [HideInInspector]
-        public bool isSpeaking = false;
 
         private GameObject anchor;
 
         private SpriteSwitcher spriteSwitcher;
+        private Speaker speaker;
         private CharacterStory story;
         private Rigidbody2D rigidBody;
         private Collider2D physicsCollider;
@@ -62,6 +62,7 @@ namespace IndieMarc.Platformer
             
             rigidBody = GetComponent<Rigidbody2D>();
             story = GetComponent<CharacterStory>();
+            speaker = GetComponent<Speaker>();
             anchor = gameObject.transform.Find("Anchor").gameObject;
 
             if (isScarecrow) {
@@ -106,7 +107,7 @@ namespace IndieMarc.Platformer
         }
 
         void FixedUpdate() {
-            if (isSpeaking || !isEnabled) return;
+            if (speaker.isSpeaking || !isEnabled) return;
 
             if (isScarecrow) {
                 move.x = -moveInput.x;
@@ -160,9 +161,8 @@ namespace IndieMarc.Platformer
                     } else {
                         CallBubble("Yums!");
                     }
-                } else if (isSpeaking) {
-                    speechBubble.Hide();
-                    isSpeaking = false;
+                } else if (speaker.isSpeaking) {
+                    speaker.isSpeaking = false;
                 } else if (story.currentEventId == "awaiting_scarecrow") {
                     GameProgress.enteredScarecrow = true;
                     GameProgress.stories["fox"] = "awaiting_scarecrow";
@@ -172,8 +172,8 @@ namespace IndieMarc.Platformer
         }
 
         public void CallBubble(string text) {
-            speechBubble.Call(text, anchor);
-            isSpeaking = true;
+            storyManager.speechBubble.Call(text, anchor);
+            speaker.isSpeaking = true;
         }
 
         private void UpdateFacing()
@@ -187,7 +187,7 @@ namespace IndieMarc.Platformer
 
         public void Jump()
         {
-            if (!isGrounded || isSpeaking) return;
+            if (!isGrounded || speaker.isSpeaking) return;
 
             Vector2 direction = transform.TransformDirection(Vector2.up);
             rigidBody.AddForce(direction * jumpStrength, ForceMode2D.Force);

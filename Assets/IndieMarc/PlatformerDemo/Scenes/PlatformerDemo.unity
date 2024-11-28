@@ -192,6 +192,33 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1884695330}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &608807430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608807429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a919d7994b994623b91a0cbe3a96ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchor: {fileID: 1884695331}
+  isSpeaking: 0
+--- !u!114 &608807431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608807429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7aded4552a544d38b204f4b612a38b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites: []
 --- !u!1 &662723638
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +621,74 @@ MonoBehaviour:
   down_key: 115
   jump_key: 32
   action_key: 102
+--- !u!1 &1119918430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119918431}
+  - component: {fileID: 1119918432}
+  m_Layer: 0
+  m_Name: StoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1119918431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119918430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2001445338}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1119918432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119918430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf465436f07b84e8ba52a2e5aeb35543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speechBubble: {fileID: 701231035}
+  lines:
+  - id: fox_awake
+    events:
+    - id: 
+      type: 1
+      delayTime: 1
+      speaker: {fileID: 0}
+      speech: 
+    - id: 
+      type: 0
+      delayTime: 0
+      speaker: {fileID: 608807430}
+      speech: mhmmmm....
+    - id: 
+      type: 0
+      delayTime: 0
+      speaker: {fileID: 608807430}
+      speech: I'm hungry
+    - id: 
+      type: 0
+      delayTime: 0
+      speaker: {fileID: 608807430}
+      speech: Should probably pay that farmer a visit
 --- !u!1 &1155121592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,7 +1341,12 @@ PrefabInstance:
         type: 3}
       propertyPath: speechBubble
       value: 
-      objectReference: {fileID: 701231035}
+      objectReference: {fileID: 0}
+    - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: storyManager
+      value: 
+      objectReference: {fileID: 1119918432}
     - target: {fileID: 114086076410299948, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
       propertyPath: movementSpeed
@@ -1282,6 +1382,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56,
         type: 3}
@@ -1331,8 +1436,22 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1262357808126890, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 608807431}
+    - targetCorrespondingSourceObject: {fileID: 1262357808126890, guid: 488fef3a70db04a7d975594f7ab7ce56,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 608807430}
   m_SourcePrefab: {fileID: 100100000, guid: 488fef3a70db04a7d975594f7ab7ce56, type: 3}
+--- !u!1 &1884695331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1651718516125928166, guid: 488fef3a70db04a7d975594f7ab7ce56,
+    type: 3}
+  m_PrefabInstance: {fileID: 1884695330}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1900979990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,6 +1603,7 @@ Transform:
   m_Children:
   - {fileID: 985602784}
   - {fileID: 1604467553}
+  - {fileID: 1119918431}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2060995635
