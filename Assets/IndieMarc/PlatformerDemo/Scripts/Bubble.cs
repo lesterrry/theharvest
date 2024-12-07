@@ -10,10 +10,17 @@ using UnityEngine.UI;
 public class Bubble : MonoBehaviour {
 
     public bool isEnabled;
-    public Text? textElement;
+    public bool showHideAnimation = false;
     public GameObject? anchor;
+    
+    private Text? textElement;
+    private Animator? animator;
+    private CircleCollider2D collider;
 
     void Awake() {
+        textElement = GetComponentInChildren<Text>();
+        animator = GetComponent<Animator>();
+        collider = GetComponent<CircleCollider2D>();
         UpdateAppearance();
     }
 
@@ -48,7 +55,13 @@ public class Bubble : MonoBehaviour {
     }
 
     private void UpdateAppearance() {
-        gameObject.SetActive(isEnabled);
+        if (showHideAnimation) {
+            animator?.SetBool("shown", isEnabled);
+            collider.enabled = isEnabled;
+        } else {
+            gameObject.SetActive(isEnabled);
+        }
+
         if (!isEnabled) anchor = null;
     }
 }

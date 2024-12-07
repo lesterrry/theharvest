@@ -209,7 +209,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.5418549, w: 0.84047204}
   m_LocalPosition: {x: -0.017, y: 0.248, z: -0.29265475}
   m_LocalScale: {x: 1.1857886, y: 1.1857886, z: 1.1857886}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2106425743555357890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 65.62}
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 0
-  textElement: {fileID: 0}
+  showHideAnimation: 1
   anchor: {fileID: 0}
 --- !u!95 &3482347701978972604
 Animator:
