@@ -83,6 +83,8 @@ namespace IndieMarc.Platformer
                 if (GameProgress.Get("in_scarecrow") == "true") {
                     gameObject.SetActive(false);
                     isEnabled = false;
+                } else {
+                    storyManager.RunStoryline("fox_first_time");
                 }
             }
 
@@ -155,7 +157,7 @@ namespace IndieMarc.Platformer
                     if (veggiesTaken >= 3) {
                         CallBubble("Yums!!! Time to leave for today");
                     } else {
-                        CallBubble("Yums!");
+                        storyManager.RunStoryline("scarecrow_ate");
                     }
                 } else if (speaker.isSpeaking) {
                     speaker.isSpeaking = false;

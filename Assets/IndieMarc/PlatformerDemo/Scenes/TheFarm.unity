@@ -1313,12 +1313,12 @@ PrefabInstance:
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.79
+      value: 1.48
       objectReference: {fileID: 0}
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -5.32
+      value: -5.39
       objectReference: {fileID: 0}
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBubble: {fileID: 1689860962}
-  initialStorylineId: fox_first_time
+  initialStorylineId: 
   currentStorylineId: 
   currentEventId: 
   lines:
@@ -1837,6 +1837,13 @@ MonoBehaviour:
       delayTime: 1
       speaker: {fileID: 800688095}
       speech: 
+  - id: scarecrow_ate
+    events:
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: Yums!
 --- !u!1 &1661282386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,7 +2148,7 @@ Transform:
   m_GameObject: {fileID: 1262359461378041}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.05408127, w: 0.9985365}
-  m_LocalPosition: {x: -3.5921519, y: -4.40757, z: -0.3371432}
+  m_LocalPosition: {x: -3.5921519, y: -4.40757, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
