@@ -30,15 +30,20 @@ namespace IndieMarc.Platformer {
 
     public class StoryManager : MonoBehaviour {
         public Bubble? speechBubble;
-        public Storyline[] lines = new Storyline[0];
 
         public string? initialStorylineId;
 
+        public string? currentStorylineId;
+        public string currentEventId = string.Empty;
+
+        public Storyline[] lines = new Storyline[0];
+
         private IEnumerator RunStoryline(Storyline storyline, string? forceEvent = null) {
+            currentStorylineId = storyline.id;
             foreach (StoryEvent e in storyline.events) {
                 if (forceEvent != null && e.id != forceEvent) continue;
 
-                // currentEventId = e.id;
+                currentEventId = e.id;
                 switch (e.type) {
                     case StoryEvent.Type.Delay: {
                         yield return new WaitForSeconds(e.delayTime);
@@ -64,7 +69,13 @@ namespace IndieMarc.Platformer {
             end:;
         }
 
-         void Start() {
+        public void RunStoryline(string id) {
+            Storyline line = lines.FirstOrDefault(line => line.id == id);
+
+            if (line != null) StartCoroutine(RunStoryline(line));
+        }
+
+        void Start() {
             if (initialStorylineId != null) {
                 Storyline initial = lines.FirstOrDefault(line => line.id == initialStorylineId);
                 

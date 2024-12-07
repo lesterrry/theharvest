@@ -12,7 +12,6 @@ using UnityEngine.Events;
 namespace IndieMarc.Platformer
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(CharacterStory))]
     [RequireComponent(typeof(Speaker))]
     public class CharacterLogic : MonoBehaviour
     {
@@ -38,7 +37,6 @@ namespace IndieMarc.Platformer
 
         private SpriteSwitcher spriteSwitcher;
         private Speaker speaker;
-        private CharacterStory story;
         private Rigidbody2D rigidBody;
         private Collider2D physicsCollider;
         private Collider2D collisionCollider;
@@ -61,7 +59,6 @@ namespace IndieMarc.Platformer
             characterList[playerId] = this;
             
             rigidBody = GetComponent<Rigidbody2D>();
-            story = GetComponent<CharacterStory>();
             speaker = GetComponent<Speaker>();
             anchor = gameObject.transform.Find("Anchor").gameObject;
 
@@ -70,7 +67,7 @@ namespace IndieMarc.Platformer
                 collisionCollider = GetComponent<CapsuleCollider2D>();
                 spriteSwitcher = GetComponent<SpriteSwitcher>();
                 
-                if (GameProgress.enteredScarecrow) {
+                if (GameProgress.Get("in_scarecrow") == "true") {
                     isEnabled = true;
                     rigidBody.bodyType = RigidbodyType2D.Dynamic;
                     spriteSwitcher.Switch(1);
@@ -78,13 +75,12 @@ namespace IndieMarc.Platformer
                     GameObject[] veggies = GameObject.FindGameObjectsWithTag("Veggie");
                     foreach (GameObject veggie in veggies) {
                         veggie.GetComponent<Bubble>().Show();
-                        Debug.Log("!!!");
                     }
                 }
             } else {
                 physicsCollider = GetComponent<CapsuleCollider2D>();
 
-                if (GameProgress.enteredScarecrow) {
+                if (GameProgress.Get("in_scarecrow") == "true") {
                     gameObject.SetActive(false);
                     isEnabled = false;
                 }
@@ -163,9 +159,8 @@ namespace IndieMarc.Platformer
                     }
                 } else if (speaker.isSpeaking) {
                     speaker.isSpeaking = false;
-                } else if (story.currentEventId == "awaiting_scarecrow") {
-                    GameProgress.enteredScarecrow = true;
-                    GameProgress.stories["fox"] = "awaiting_scarecrow";
+                } else if (storyManager.currentEventId == "awaiting_scarecrow") {
+                    GameProgress.entries["in_scarecrow"] = "true";
                     Reload();
                 }
             }

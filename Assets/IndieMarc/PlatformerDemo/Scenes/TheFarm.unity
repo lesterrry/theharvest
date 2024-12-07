@@ -638,7 +638,8 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.newSize.y
       value: 1.05
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 506293965363926151, guid: 488fef3a70db04a7d975594f7ab7ce56, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1800,6 +1801,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBubble: {fileID: 1689860962}
+  initialStorylineId: fox_first_time
+  currentStorylineId: 
+  currentEventId: 
   lines:
   - id: fox_first_time
     events:
@@ -1828,7 +1832,11 @@ MonoBehaviour:
       delayTime: 1
       speaker: {fileID: 800688095}
       speech: ...whatever that means
-  initialStorylineId: fox_first_time
+    - id: awaiting_scarecrow
+      type: 2
+      delayTime: 1
+      speaker: {fileID: 800688095}
+      speech: 
 --- !u!1 &1661282386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,7 +2123,6 @@ GameObject:
   - component: {fileID: 212331577210300940}
   - component: {fileID: 212331577210300941}
   - component: {fileID: 114086078012238463}
-  - component: {fileID: 212331577210300942}
   - component: {fileID: 212331577210300943}
   - component: {fileID: 212331577210300944}
   m_Layer: 0
@@ -2323,21 +2330,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01297605, y: 0.26601064}
   m_Size: {x: 0.9826324, y: 2.5267909}
   m_Direction: 0
---- !u!114 &212331577210300942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262359461378041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fd5bcc2a04774de3aec1d598ca215fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  storyId: 
-  currentEventId: 
-  events: []
 --- !u!114 &212331577210300943
 MonoBehaviour:
   m_ObjectHideFlags: 0
