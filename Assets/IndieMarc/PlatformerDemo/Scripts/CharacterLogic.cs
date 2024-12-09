@@ -4,17 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Platformer character movement
-/// Author: Indie Marc (Marc-Antoine Desbiens)
-/// </summary>
-
-namespace IndieMarc.Platformer
-{
+namespace IndieMarc.Platformer {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Speaker))]
-    public class CharacterLogic : MonoBehaviour
-    {
+    public class CharacterLogic : MonoBehaviour {
         public int playerId;
 
         [Header("Main")]
@@ -221,11 +214,11 @@ namespace IndieMarc.Platformer
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision) {
-            if (isScarecrow && collision.gameObject.tag == "Veggie") {
-                activeCollision = collision;
-            } else if (collision.gameObject.tag == "SceneSwitcher") {
-                SceneSwitchTrigger trigger = collision.gameObject.GetComponent<SceneSwitchTrigger>();
+        private void OnTriggerEnter2D(Collider2D collider) {
+            if (isScarecrow && collider.gameObject.tag == "Veggie" && collider is CircleCollider2D) {
+                activeCollision = collider;
+            } else if (collider.gameObject.tag == "SceneSwitcher") {
+                SceneSwitchTrigger trigger = collider.gameObject.GetComponent<SceneSwitchTrigger>();
                 sceneSwitcher.StartSwitchScene(trigger.targetScene);
             }
         }
