@@ -202,12 +202,12 @@ PrefabInstance:
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 9.61
+      value: 12.09
       objectReference: {fileID: 0}
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -5.2
+      value: -5.23
       objectReference: {fileID: 0}
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
@@ -227,7 +227,12 @@ PrefabInstance:
     - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: isEnabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: isExpectingProximity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4282649142060453272, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
@@ -768,7 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sleepDuration: 5
   awakeDuration: 2
-  isAlive: 1
+  isAlive: 0
   speechBubble: {fileID: 1689860962}
   isSleeping: 1
 --- !u!1 &578014705
@@ -1143,12 +1148,12 @@ PrefabInstance:
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 15.17
+      value: 19.99
       objectReference: {fileID: 0}
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -5.43
+      value: -5.37
       objectReference: {fileID: 0}
     - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
@@ -1168,6 +1173,11 @@ PrefabInstance:
     - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: isEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: isExpectingProximity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4282649142060453272, guid: e1291abfcb29e4b2cb522962062f44d3,
@@ -1343,7 +1353,7 @@ PrefabInstance:
     - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
       propertyPath: isEnabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
         type: 3}
@@ -1422,6 +1432,7 @@ Transform:
   m_Children:
   - {fileID: 631506273}
   - {fileID: 651700189}
+  - {fileID: 1248217805}
   - {fileID: 1139170796}
   - {fileID: 26912313}
   - {fileID: 956288269}
@@ -1478,6 +1489,161 @@ MonoBehaviour:
   down_key: 115
   jump_key: 32
   action_key: 102
+--- !u!1001 &1248217804
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1201893796}
+    m_Modifications:
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 7.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3482347701978972604, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e596080f01491463190111fa1e0d748c, type: 2}
+    - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: isEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993763330839325239, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: isExpectingProximity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282649142060453272, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282649142060453272, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643716829275559586, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643716829275559586, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393327177783787698, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540826952203757023, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cee137f91eb3e492e8b79061c70f5ca9,
+        type: 3}
+    - target: {fileID: 7475100456496692711, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_Name
+      value: House
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475100456496692711, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475100456496692711, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_TagString
+      value: HouseEntry
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715637898604085564, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715637898604085564, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715637898604085564, guid: e1291abfcb29e4b2cb522962062f44d3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e1291abfcb29e4b2cb522962062f44d3, type: 3}
+--- !u!224 &1248217805 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2106425743555357890, guid: e1291abfcb29e4b2cb522962062f44d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1248217804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1324080044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1859,6 +2025,50 @@ MonoBehaviour:
       delayTime: 1
       speaker: {fileID: 212331577210300944}
       speech: Yums!
+  - id: scarecrow_first_time
+    events:
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: Alright...
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: Not too comfy
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: But sneaky enough
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: Will try to move now...
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: ...carefully
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: ...towards these tasty veggies
+  - id: early_house_enter
+    events:
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: No way I can enter the house like this
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: That stick will make so much noise!
 --- !u!1 &1661282386
 GameObject:
   m_ObjectHideFlags: 0

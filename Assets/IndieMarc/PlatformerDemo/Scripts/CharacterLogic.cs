@@ -60,20 +60,19 @@ namespace IndieMarc.Platformer {
                 collisionCollider = GetComponent<CapsuleCollider2D>();
                 spriteSwitcher = GetComponent<SpriteSwitcher>();
                 
-                if (GameProgress.Get("in_scarecrow") == "true") {
+                if (GameProgress.IsTrue("in_scarecrow")) {
                     isEnabled = true;
                     rigidBody.bodyType = RigidbodyType2D.Dynamic;
                     spriteSwitcher.Switch(1);
 
-                    GameObject[] veggies = GameObject.FindGameObjectsWithTag("Veggie");
-                    foreach (GameObject veggie in veggies) {
-                        veggie.GetComponent<Bubble>().Show();
+                    if (!GameProgress.IsTrue("has_been_reset")) {
+                        storyManager.RunStoryline("scarecrow_first_time");
                     }
                 }
             } else {
                 physicsCollider = GetComponent<CapsuleCollider2D>();
 
-                if (GameProgress.Get("in_scarecrow") == "true") {
+                if (GameProgress.IsTrue("in_scarecrow")) {
                     gameObject.SetActive(false);
                     isEnabled = false;
                 } else {
@@ -124,6 +123,7 @@ namespace IndieMarc.Platformer {
 
             if (isScarecrow && isBusted && actionPress) {
                 CallBubble("АААААА!!!!");
+                GameProgress.Set("has_been_reset", "true");
                 Reload();
             }
 
@@ -143,17 +143,26 @@ namespace IndieMarc.Platformer {
             if (jumpPress) Jump();
 
             if (actionPress) {
-                if (activeCollision) {
-                    Bubble veggie = activeCollision.gameObject.GetComponent<Bubble>();
-                    veggie?.Hide();
-                    veggiesTaken++;
-                    if (veggiesTaken >= 3) {
-                        CallBubble("Yums!!! Time to leave for today");
-                    } else {
-                        storyManager.RunStoryline("scarecrow_ate");
-                    }
-                } else if (speaker.isSpeaking) {
+                if (speaker.isSpeaking) {
                     speaker.isSpeaking = false;
+                } else if (activeCollision) {
+                    GameObject gameObject = activeCollision.gameObject;
+                    Bubble bubble = gameObject.GetComponent<Bubble>();
+                    bubble?.Hide(false);
+
+                    if (gameObject.tag == "Veggie") {
+                        bubble?.Hide(true);
+
+                        veggiesTaken++;
+
+                        if (veggiesTaken >= 3) {
+                            CallBubble("Yums!!! Time to leave for today");
+                        } else {
+                            storyManager.RunStoryline("scarecrow_ate");
+                        }
+                    } else if (gameObject.tag == "HouseEntry") {
+                        storyManager.RunStoryline("early_house_enter");
+                    }
                 } else if (storyManager.currentEventId == "awaiting_scarecrow") {
                     GameProgress.entries["in_scarecrow"] = "true";
                     Reload();
@@ -199,6 +208,7 @@ namespace IndieMarc.Platformer {
             if (isScarecrow && isEnabled && collision.gameObject.tag == "Ground") {
                 if (collisionCollider.IsTouching(collision.collider)) {
                     CallBubble("Ouch :(");
+                    GameProgress.Set("has_been_reset", "true");
                     Reload();
                 } else if (physicsCollider.IsTouching(collision.collider)) {
                     isGrounded = true;
@@ -215,7 +225,7 @@ namespace IndieMarc.Platformer {
         }
 
         private void OnTriggerEnter2D(Collider2D collider) {
-            if (isScarecrow && collider.gameObject.tag == "Veggie" && collider is CircleCollider2D) {
+            if (isScarecrow && collider is CircleCollider2D) {
                 activeCollision = collider;
             } else if (collider.gameObject.tag == "SceneSwitcher") {
                 SceneSwitchTrigger trigger = collider.gameObject.GetComponent<SceneSwitchTrigger>();

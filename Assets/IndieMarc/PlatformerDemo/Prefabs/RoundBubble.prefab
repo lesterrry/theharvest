@@ -306,7 +306,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.4, y: -5.36}
   m_SizeDelta: {x: 1.5, y: 1.5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.78}
 --- !u!212 &5643716829275559586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -393,7 +393,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.04051447, y: 0.26109314}
   serializedVersion: 2
-  m_Radius: 1.0516076
+  m_Radius: 1.5338215
 --- !u!114 &3993763330839325239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnabled: 0
+  isExpectingProximity: 0
   showHideAnimation: 1
   anchor: {fileID: 0}
 --- !u!95 &3482347701978972604
@@ -462,6 +463,6 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06633399, y: 1.7248813}
-  m_Size: {x: 10.316193, y: 5.8997912}
-  m_Direction: 1
+  m_Offset: {x: -0.06633384, y: 0.3586599}
+  m_Size: {x: 6.562244, y: 12.429778}
+  m_Direction: 0

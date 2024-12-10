@@ -37,8 +37,12 @@ namespace IndieMarc.Platformer {
             }
         }
 
-        public void Hide() {
-            isEnabled = false;
+        public void Hide(bool permanently = true) {
+            if (!permanently && isExpectingProximity) {
+                inProximity = false;
+            } else {
+                isEnabled = false;
+            }
             UpdateAppearance();
         }
 

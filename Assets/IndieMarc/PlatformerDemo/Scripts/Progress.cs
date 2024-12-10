@@ -19,6 +19,14 @@ namespace IndieMarc.Platformer {
 
             return null;
         }
+    
+        public static void Set(string key, string value) {
+            entries[key] = value;
+        }
+
+        public static bool IsTrue(string key) {
+            return Get(key) == "true";
+        }
 
         public static void Reset()  {
             entries = new Dictionary<string, string>();

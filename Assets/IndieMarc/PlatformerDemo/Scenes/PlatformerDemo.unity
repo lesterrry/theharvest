@@ -358,6 +358,11 @@ PrefabInstance:
       propertyPath: isEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5487041717763875370, guid: 92e1fb08578f443c3b0125dacedc5751,
+        type: 3}
+      propertyPath: showHideAnimation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5632197877502508508, guid: 92e1fb08578f443c3b0125dacedc5751,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -666,6 +671,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechBubble: {fileID: 701231035}
+  initialStorylineId: fox_awake
+  currentStorylineId: 
+  currentEventId: 
   lines:
   - id: fox_awake
     events:
