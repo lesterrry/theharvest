@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace IndieMarc.Platformer {
@@ -23,7 +24,6 @@ namespace IndieMarc.Platformer {
         [Header("Connections")]
         public SceneSwitcher sceneSwitcher;
         public StoryManager storyManager;
-        public Bubble speechBubble;
         public FarmerLogic farmer;
 
         private GameObject anchor;
@@ -76,7 +76,19 @@ namespace IndieMarc.Platformer {
                     gameObject.SetActive(false);
                     isEnabled = false;
                 } else {
-                    storyManager.RunStoryline("fox_first_time");
+                    if (GameProgress.Get("scene") == "TheDen") {
+                        if (GameProgress.IsTrue("is_night")) {
+                            storyManager.RunStoryline("fox_first_night");
+                        } else {
+                            if (GameProgress.Get("day") == "1") {
+                                storyManager.RunStoryline("fox_first_day");
+                            }
+                        }
+                    } else if (GameProgress.Get("scene") == "TheFarm") {
+                        storyManager.RunStoryline("fox_first_time");
+                    } else {
+                        storyManager.RunStoryline("fox_awake");
+                    }
                 }
             }
 
@@ -129,7 +141,9 @@ namespace IndieMarc.Platformer {
 
             if (isScarecrow && veggiesTaken >= 3 && actionPress) {
                 GameProgress.Reset();
-                sceneSwitcher.StartSwitchScene("PlatformerDemo");
+                GameProgress.Set("next_bg_index", "1");
+                GameProgress.Set("is_night", "true");
+                sceneSwitcher.StartSwitchScene("TheDen");
             }
 
             if (!isEnabled) return;
@@ -162,6 +176,10 @@ namespace IndieMarc.Platformer {
                         }
                     } else if (gameObject.tag == "HouseEntry") {
                         storyManager.RunStoryline("early_house_enter");
+                    } else if (gameObject.tag == "Bed") {
+                        GameProgress.Unset("is_night");
+                        GameProgress.Set("day", "1");
+                        sceneSwitcher.StartSwitchScene("TheDen");
                     }
                 } else if (storyManager.currentEventId == "awaiting_scarecrow") {
                     GameProgress.entries["in_scarecrow"] = "true";
@@ -225,7 +243,7 @@ namespace IndieMarc.Platformer {
         }
 
         private void OnTriggerEnter2D(Collider2D collider) {
-            if (isScarecrow && collider is CircleCollider2D) {
+            if (collider is CircleCollider2D) {
                 activeCollision = collider;
             } else if (collider.gameObject.tag == "SceneSwitcher") {
                 SceneSwitchTrigger trigger = collider.gameObject.GetComponent<SceneSwitchTrigger>();

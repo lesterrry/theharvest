@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,10 +8,20 @@ using UnityEngine.UI;
 namespace IndieMarc.Platformer {
     public class SceneSwitcher : MonoBehaviour {
         public Image fadeImage;
+        public SpriteSwitcher backgroundSpriteSwitcher;
 
         public float fadeSpeed = 1f;
 
         void Awake() {
+            string? nextBg = GameProgress.Get("next_bg_index");
+
+            if (nextBg != null) {
+                try {
+                    int nextBgIndex = int.Parse(nextBg);
+                    backgroundSpriteSwitcher.Switch(nextBgIndex);
+                    GameProgress.Unset("next_bg_index");
+                } catch {}
+            }
             StartCoroutine(FadeIn());
         }
 
@@ -31,6 +43,7 @@ namespace IndieMarc.Platformer {
 
         IEnumerator SwitchScene(string sceneName) {
             yield return StartCoroutine(Fade(false, fadeSpeed));
+            GameProgress.Set("scene", sceneName);
             SceneManager.LoadScene(sceneName);
         }
 

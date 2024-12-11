@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +11,16 @@ namespace IndieMarc.Platformer {
     public class GameProgress {
         [HideInInspector]
 
-        public static Dictionary<string, string> entries = new Dictionary<string, string>();
+        private static readonly IReadOnlyDictionary<string, string> entriesOverride = new ReadOnlyDictionary<string, string>(
+            new Dictionary<string, string> {
+                { "scene", "TheDen" },
+                { "is_night", "true" },
+                { "next_bg_index", "1" },
+                // { "next_bg_index", "1" },
+                }
+        );
+
+        public static Dictionary<string, string> entries = new Dictionary<string, string>(entriesOverride);
 
         public static string? Get(string key) {
             if (entries.TryGetValue(key, out var value)) {
@@ -24,12 +34,16 @@ namespace IndieMarc.Platformer {
             entries[key] = value;
         }
 
+        public static void Unset(string key) {
+            entries.Remove(key);
+        }
+
         public static bool IsTrue(string key) {
             return Get(key) == "true";
         }
 
         public static void Reset()  {
-            entries = new Dictionary<string, string>();
+            entries = new Dictionary<string, string>(entriesOverride);
         }
 
         static GameProgress() {

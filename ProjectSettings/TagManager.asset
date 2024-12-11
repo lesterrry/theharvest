@@ -8,6 +8,7 @@ TagManager:
   - Veggie
   - SceneSwitcher
   - HouseEntry
+  - Bed
   layers:
   - Default
   - TransparentFX

@@ -53,6 +53,7 @@ namespace IndieMarc.Platformer {
                         if (speechBubble == null || e.speaker == null) break;
                         
                         speechBubble.Call(e.speech, e.speaker.anchor);
+
                         e.speaker.isSpeaking = true;
 
                         while (e.speaker.isSpeaking) yield return null;
