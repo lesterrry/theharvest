@@ -22,7 +22,6 @@ namespace IndieMarc.Platformer {
         void Start() {
             spriteSwitcher = GetComponent<SpriteSwitcher>();
             anchor = gameObject.transform.Find("Anchor").gameObject;
-            StartCoroutine(Live());
         }
 
         public void HeartAttack() {
@@ -30,6 +29,12 @@ namespace IndieMarc.Platformer {
             isSleeping = false;
 
             speechBubble.Call("AAAAAAAGHH!!!!", anchor);
+        }
+
+        public void Resurrect() {
+            isAlive = true;
+
+            StartCoroutine(Live());
         }
 
         private IEnumerator Live() {

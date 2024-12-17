@@ -79,7 +79,6 @@ namespace IndieMarc.Platformer {
 
         private void OnTriggerEnter2D(Collider2D collider) {
             if (proximityCollider.IsTouching(collider) && collider.gameObject.tag == "Player") {
-                Debug.Log("Enter");
                 inProximity = true;
                 UpdateAppearance();
             }
@@ -87,7 +86,6 @@ namespace IndieMarc.Platformer {
 
         private void OnTriggerExit2D(Collider2D collider) {
             if (!proximityCollider.IsTouching(collider) && collider.gameObject.tag == "Player") {
-                Debug.Log("Exit");
                 inProximity = false;
                 UpdateAppearance();
             }

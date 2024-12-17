@@ -65,8 +65,11 @@ namespace IndieMarc.Platformer {
                     rigidBody.bodyType = RigidbodyType2D.Dynamic;
                     spriteSwitcher.Switch(1);
 
-                    if (!GameProgress.IsTrue("has_been_reset")) {
-                        storyManager.RunStoryline("scarecrow_first_time");
+                    if (GameProgress.Get("day") != "1") {
+                        if (!GameProgress.IsTrue("has_been_reset")) storyManager.RunStoryline("scarecrow_first_time");
+                    } else if (GameProgress.Get("day") == "1") {
+                        if (!GameProgress.IsTrue("has_been_reset")) storyManager.RunStoryline("scarecrow_second_time");
+                        farmer.Resurrect();
                     }
                 }
             } else {
@@ -85,7 +88,11 @@ namespace IndieMarc.Platformer {
                             }
                         }
                     } else if (GameProgress.Get("scene") == "TheFarm") {
-                        storyManager.RunStoryline("fox_first_time");
+                        if (GameProgress.Get("day") != "1") {
+                            storyManager.RunStoryline("fox_first_time");
+                        } else if (GameProgress.Get("day") == "1") {
+                            storyManager.RunStoryline("fox_second_time");
+                        }
                     } else {
                         storyManager.RunStoryline("fox_awake");
                     }
@@ -148,7 +155,7 @@ namespace IndieMarc.Platformer {
 
             if (!isEnabled) return;
 
-            if (isScarecrow && !farmer.isSleeping && (moveInput.x != 0 || jumpPress || actionPress)) {
+            if (isScarecrow && !farmer.isSleeping && !storyManager.isRunning && (moveInput.x != 0 || jumpPress)) {
                 farmer.HeartAttack();
                 isEnabled = false;
                 isBusted = true;
@@ -157,8 +164,8 @@ namespace IndieMarc.Platformer {
             if (jumpPress) Jump();
 
             if (actionPress) {
-                if (speaker.isSpeaking) {
-                    speaker.isSpeaking = false;
+                if (storyManager.isRunning) {
+                    storyManager.ResetSpeaking();
                 } else if (activeCollision) {
                     GameObject gameObject = activeCollision.gameObject;
                     Bubble bubble = gameObject.GetComponent<Bubble>();
@@ -176,6 +183,14 @@ namespace IndieMarc.Platformer {
                         }
                     } else if (gameObject.tag == "HouseEntry") {
                         storyManager.RunStoryline("early_house_enter");
+                    } else if (gameObject.tag == "WolfEntry") {
+                        if (!GameProgress.IsTrue("wolf_summon_attempted")) {
+                            GameProgress.Set("wolf_summon_attempted", "true");
+                            storyManager.RunStoryline("early_wolf_summon");
+                        } else {
+                            Debug.Log("aaa");
+                            storyManager.RunStoryline("second_wolf_summon");
+                        }
                     } else if (gameObject.tag == "Bed") {
                         GameProgress.Unset("is_night");
                         GameProgress.Set("day", "1");

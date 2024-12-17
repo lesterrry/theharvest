@@ -13,9 +13,10 @@ namespace IndieMarc.Platformer {
 
         private static readonly IReadOnlyDictionary<string, string> entriesOverride = new ReadOnlyDictionary<string, string>(
             new Dictionary<string, string> {
-                { "scene", "TheDen" },
-                { "is_night", "true" },
-                { "next_bg_index", "1" },
+                { "scene", "TheFarm" },
+                { "day", "1" },
+                // { "is_night", "true" },
+                // { "next_bg_index", "1" },
                 // { "next_bg_index", "1" },
                 }
         );

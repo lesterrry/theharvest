@@ -9,6 +9,7 @@ TagManager:
   - SceneSwitcher
   - HouseEntry
   - Bed
+  - WolfEntry
   layers:
   - Default
   - TransparentFX
