@@ -1685,7 +1685,7 @@ MonoBehaviour:
   camera_speed: 5
   level_bottom: -5
   level_left: -9
-  level_right: 40
+  level_right: 30
 --- !u!81 &1324080046
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2121,13 +2121,6 @@ MonoBehaviour:
       delayTime: 0
       speaker: {fileID: 212331577210300944}
       speech: I need to be extra careful
-  - id: scarecrow_ate
-    events:
-    - id: 
-      type: 0
-      delayTime: 1
-      speaker: {fileID: 212331577210300944}
-      speech: Yums!
   - id: early_house_enter
     events:
     - id: 
@@ -2217,6 +2210,31 @@ MonoBehaviour:
       delayTime: 0
       speaker: {fileID: 2108960824}
       speech: ...zzz
+    - id: 
+      type: 1
+      delayTime: 2
+      speaker: {fileID: 212331577210300944}
+      speech: 
+    - id: 
+      type: 0
+      delayTime: 2
+      speaker: {fileID: 212331577210300944}
+      speech: hmm...
+    - id: 
+      type: 0
+      delayTime: 2
+      speaker: {fileID: 212331577210300944}
+      speech: Maybe this dog will help me get inside the house?
+    - id: 
+      type: 0
+      delayTime: 2
+      speaker: {fileID: 212331577210300944}
+      speech: I should find some veggies for him tomorrow
+    - id: wolf_summon_attempted
+      type: 3
+      delayTime: 0
+      speaker: {fileID: 2108960824}
+      speech: true
   - id: second_wolf_summon
     events:
     - id: 
@@ -2239,6 +2257,20 @@ MonoBehaviour:
       delayTime: 1
       speaker: {fileID: 2108960824}
       speech: zzz...
+  - id: scarecrow_ate
+    events:
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: Yums!
+  - id: scarecrow_ate_all
+    events:
+    - id: 
+      type: 0
+      delayTime: 1
+      speaker: {fileID: 212331577210300944}
+      speech: Yums!!! Got them all!
 --- !u!1 &1661282386
 GameObject:
   m_ObjectHideFlags: 0

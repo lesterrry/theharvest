@@ -146,7 +146,7 @@ namespace IndieMarc.Platformer {
                 Reload();
             }
 
-            if (isScarecrow && veggiesTaken >= 3 && actionPress) {
+            if (veggiesTaken >= 3 && GameProgress.IsTrue("wolf_summon_attempted")) {
                 GameProgress.Reset();
                 GameProgress.Set("next_bg_index", "1");
                 GameProgress.Set("is_night", "true");
@@ -177,7 +177,8 @@ namespace IndieMarc.Platformer {
                         veggiesTaken++;
 
                         if (veggiesTaken >= 3) {
-                            CallBubble("Yums!!! Time to leave for today");
+                            storyManager.RunStoryline("scarecrow_ate_all");
+                            GameProgress.Set("total_veggies_taken", "3");
                         } else {
                             storyManager.RunStoryline("scarecrow_ate");
                         }
@@ -185,7 +186,6 @@ namespace IndieMarc.Platformer {
                         storyManager.RunStoryline("early_house_enter");
                     } else if (gameObject.tag == "WolfEntry") {
                         if (!GameProgress.IsTrue("wolf_summon_attempted")) {
-                            GameProgress.Set("wolf_summon_attempted", "true");
                             storyManager.RunStoryline("early_wolf_summon");
                         } else {
                             Debug.Log("aaa");

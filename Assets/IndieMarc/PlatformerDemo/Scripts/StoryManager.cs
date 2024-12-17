@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections;
+using System.Data.Common;
 using System.Linq;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace IndieMarc.Platformer {
         public enum Type {
             Say,
             Delay,
-            Await
+            Await,
+            Set
         };
 
         public string id = string.Empty;
@@ -53,7 +55,9 @@ namespace IndieMarc.Platformer {
                 switch (e.type) {
                     case StoryEvent.Type.Delay: {
                         Debug.Log("Delaying " + e.delayTime);
+                        
                         yield return new WaitForSeconds(e.delayTime);
+                        
                         break;
                     }
                     case StoryEvent.Type.Say: {
@@ -77,6 +81,10 @@ namespace IndieMarc.Platformer {
                     case StoryEvent.Type.Await: {
                         Debug.Log("Awaiting");
                         goto end;
+                    }
+                    case StoryEvent.Type.Set: {
+                        GameProgress.Set(e.id, e.speech);
+                        break;
                     }
                 }
             }
